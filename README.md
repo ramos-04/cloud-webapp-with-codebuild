@@ -6,7 +6,7 @@ This tech stack will deploy a web app on AWS cloud and a CICD pipeline will be b
 
 
 
-      ![alt text](https://github.com/ramos-04/cloud-project/blob/master/images/architecture.png)
+      ![alt text](https://github.com/ramos-04/cloud-webapp-with-codebuild/blob/a7092135cd54fb3466248b2c6dc45ef262c9f2fe/images/architecture.png)
 
 
 2. EC2 Instance:
@@ -19,7 +19,7 @@ An ALB is sitting in front of the EC2 instance. It automatically distributes the
 AWS service CodePipeline is used to implement a CI/CD pipeline in the cloud to expedite operations like build, test, deploy, etc. It comprises of three stages. The first stage involves the operation of checking out the latest source code from a repository and storing it as an artifact(source code artifact) in the S3 bucket. In our case, we're using the GitHub repository for maintaining the code, however, alternatives like AWS CodeCommit, Bitbucket, etc too can be used. The next stage is the build stage which is carried out by the AWS CodeBuild service. This stage will take the previously-stored source code artifact as an input and a Docker image will be built out of it. Thus, this will give rise to a new artifact called the build artifact which will be stored back to the S3 bucket. We can store the newly built Docker image in Elastic Container Registry(ECR), however, I avoided the same, just to play around a bit. In the last stage, the build artifact will be deployed in the EC2 instance using the AWS CodeDeploy service. After a successful deployment, we'll be able to access our website. During the complete process, it was great to note that the AWS CodeBuild service uses a Docker image to build any artifact. The concept of "CI/CD using Docker" which is widely practiced lately is undoubtedly a great way to speed up the process and save resources.  
 
 
-   ![alt text](https://github.com/ramos-04/cloud-project/blob/master/images/AWS-CICD-Pipeline.png)
+   ![alt text](https://github.com/ramos-04/cloud-webapp-with-codebuild/blob/a7092135cd54fb3466248b2c6dc45ef262c9f2fe/images/AWS-CICD-Pipeline.png)
 
 
 7. Trigger Pipeline using Serverless Architecture:
