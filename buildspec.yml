@@ -1,0 +1,29 @@
+version: 0.2
+
+phases: 
+    install:
+        commands:
+            - echo "We can install any software required for the build procedure in this phase. As we'll be building docker images, the required configuration to support docker is already performed in the Environment configuration of the CodeBuild project"
+            
+    build:
+        commands:
+            - echo "In the build phase"
+            - cd webserver
+            - echo "building the python docker image"
+            - docker build -t python-django-server-img .
+            - echo "listing docker images"
+            - docker images
+            
+    post_build:
+        commands:
+            - echo "In the post_build phase"
+            - echo "saving the docker image to a tar file"
+            - docker save -o python-django-server-img.tar python-django-server-img
+
+artifacts:
+    files:
+        - webserver/python-django-server-img.tar
+        - appspec.yml
+        - scripts/codedeploy/*  
+
+       
